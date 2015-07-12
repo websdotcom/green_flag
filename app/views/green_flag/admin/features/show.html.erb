@@ -1,0 +1,147 @@
+<%= stylesheet_link_tag '//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css' %>
+<%= stylesheet_link_tag 'green_flag/admin/features' %>
+
+<%= content_for(:above_content) do %>
+  <h1 class="page-title"><%= link_to 'Feature Flags', green_flag_admin_features_path %> - <%= @feature.code %></h1>
+<% end %>
+
+<%# Document structure %>
+<div class="row">
+  <div id='rules' class="col-md-12 "></div>
+</div>
+
+<div class="row">
+  <div id='decisions' class="col-md-6 panel "></div>
+  <div id='white-list' class="col-md-6 panel "></div>
+  <div id='your-status' class="col-md-6 panel "></div>
+</div>
+
+<div class="row">
+</div>
+
+
+
+<%# Templates - rules %>
+<script id='rules-template' type='text/html'>
+  <h2>Rules</h2>
+
+  <div class="panel panel-default">
+    <table class="table">
+      <thead>
+        <th>Group Key</th>
+        <th>Group Description</th>
+        <th>Percentage</th>
+        <th></th>
+      </thead>
+      <tbody class="current-rules"></tbody>
+      <tfoot>
+        <th colspan="4" >
+          <div class="input-group">
+            <select class="group-keys form-control">
+              <option disabled>New Rule For...</option>
+            </select>
+            <span class="input-group-btn">
+              <input class="add-rule btn btn-primary" type="button" value="Add Rule" />
+            </span>
+          </div>
+        </th>
+
+      </tfoot>
+    </table>
+
+    <div class="invalid-message panel panel-danger">
+      <div class="panel-heading">These rules cannot be saved.</div>
+      <div class="panel-body">
+        There is probably a good reason.
+        <ul>
+          <li>Percentages should be between 0 and 100</li>
+          <li>Each group can only be included once.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="save-buttons panel">
+      <button class="save-rules btn btn-success btn-lg">Save Rules</button>
+      <button class="revert-rules btn btn-default btn-lg">Revert</button>
+    </div>
+  </div>
+</script>
+
+<script id='current-rule-template' type='text/html'>
+  <th>{{group_key}}</th>
+  <td>{{group_description}}</th>
+  <td class="percentage">
+    <input type="number" class="rule-percent" value="{{percentage}}" min="0" max="100" />%
+  </td>
+  <td>
+    <button type="button" class="close remove-rule" aria-hidden="true">&times;</button>
+  </td>
+</script>
+
+<%# Templates - decisions %>
+<script id='decisions-template' type='text/html'>
+  <h2>Decisions Made</h2>
+  <div class="panel panel-default col-md-6">
+
+    <ul class="decisions-made-summary">
+      <li>
+        <span class="decision-number">{{enabled}}</span><br>Enabled
+      </li>
+      <li>
+        <button class="forget-decisions-enabled btn btn-lg">Forget</button>
+      </li>      
+    </ul>
+
+  </div>
+
+  <div class="panel panel-default col-md-6">
+
+    <ul class="decisions-made-summary">
+      <li>
+        <span class="decision-number">{{disabled}}</span><br>Disabled
+      </li>
+      <li>
+        <button class="forget-decisions-disabled btn btn-lg">Forget</button>
+      </li>      
+    </ul>
+
+  </div>
+
+
+</script>
+
+<%# Templates - white list %>
+<script id='white-list-template' type='text/html'>
+  <h2>White List</h2>
+
+  <div class="list-group">
+    <div class='white-list-user-list'></div>
+    <div class="list-group-item">
+      <div class="alert alert-warning error-message" style="display:none">User not found</div>
+      <div class="input-group">
+        <input class="user-email form-control" placeholder="Email" />
+        <span class="input-group-btn">
+          <input class="add-user btn btn-primary" type="button" value="Add User">
+        </span>
+      </div>
+    </div>
+  </div>
+</script>
+
+<script id='white-list-user-template' type='text/html'>
+  <button type="button" class="close destroy-user" aria-hidden="true">&times;</button>
+  <strong>{{name}}</strong> {{email}}
+</script>
+
+<script id='your-status-template' type='text/html'>
+  <h2>Your Status <span class="label {{labelClass}}">{{status}}</span></h2>
+</script>
+
+<%# Javascript kickstart %>
+<%= javascript_include_tag 'green_flag/admin/features' %>
+<script>
+  GreenFlag.FeatureEditor.start({
+    feature: <%= @feature.to_json.html_safe %>,
+    allVisitorGroups: <%= @visitor_groups.to_json.html_safe %>,
+  });
+</script>
