@@ -2,6 +2,12 @@ require 'spec_helper'
 
 describe GreenFlag::SiteVisitor do
 
+  class User < OpenStruct
+    def self.primary_key
+      'id'
+    end
+  end
+
   let(:site_visitor) { GreenFlag::SiteVisitor.create(visitor_code: 'asdf') }
   let(:older_user) { User.new(created_at: (site_visitor.created_at-1)) }  
   let(:newer_user) { User.new(created_at: (site_visitor.created_at+1)) }  
