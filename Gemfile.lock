@@ -2,6 +2,8 @@ PATH
   remote: .
   specs:
     green_flag (0.0.1)
+      activerecord-concurrent-index
+      pg
       rails (~> 3.2.22)
 
 GEM
@@ -28,6 +30,8 @@ GEM
       activesupport (= 3.2.22)
       arel (~> 3.0.2)
       tzinfo (~> 0.3.29)
+    activerecord-concurrent-index (0.0.1)
+      activerecord
     activeresource (3.2.22)
       activemodel (= 3.2.22)
       activesupport (= 3.2.22)
@@ -113,5 +117,4 @@ DEPENDENCIES
   factory_girl_rails
   green_flag!
   jquery-rails
-  pg
   rspec-rails
