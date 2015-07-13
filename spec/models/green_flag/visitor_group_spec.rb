@@ -4,6 +4,9 @@ describe GreenFlag::VisitorGroup do
   before(:each) do 
     GreenFlag::VisitorGroup.clear!
   end
+  after(:all) do 
+    GreenFlag::VisitorGroup.add_default_group!
+  end
 
   describe '#define' do
     it 'does not fail' do

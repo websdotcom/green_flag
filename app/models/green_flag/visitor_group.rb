@@ -43,6 +43,12 @@ class GreenFlag::VisitorGroup
     all.map(&:key)
   end
 
+  def self.add_default_group!
+    group "Pre-existing Visitors", "Visitors that were created before this feature was deployed.  They might have seen the old version." do |visitor, rule|
+      visitor.first_visited_at < rule.created_at
+    end
+  end
+
   def initialize(key, description=nil, &block)
     self.key = key.to_s
     self.description = description
@@ -59,10 +65,4 @@ private
 
 end
 
-GreenFlag::VisitorGroup.define do
-
-  group "Pre-existing Visitors", "Visitors that were created before this feature was deployed.  They might have seen the old version." do |visitor, rule|
-    visitor.first_visited_at < rule.created_at
-  end
-
-end
+GreenFlag::VisitorGroup.add_default_group!
