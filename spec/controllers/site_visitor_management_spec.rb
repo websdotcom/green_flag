@@ -8,6 +8,10 @@ describe GreenFlag::SiteVisitorManagement do
     def index
       render :text => 'foo'
     end
+
+    def current_user
+      nil
+    end
   end
 
   let(:cookie_name) { GreenFlag::SiteVisitorManagement::COOKIE_NAME }
