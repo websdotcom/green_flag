@@ -1,7 +1,6 @@
-<%= stylesheet_link_tag '//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css' %>
-<%= stylesheet_link_tag 'green_flag/admin/features' %>
-
-<h1 class="page-title"><%= link_to 'Feature Flags', admin_features_path %> - <%= @feature.code %></h1>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <h1 class="page-title"><%= link_to 'Feature Flags', admin_features_path %> - <%= @feature.code %></h1>
+</nav>
 
 <%# Document structure %>
 <div class="row">

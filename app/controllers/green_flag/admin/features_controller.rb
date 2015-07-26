@@ -1,5 +1,7 @@
 class GreenFlag::Admin::FeaturesController < ApplicationController
 
+  layout 'green_flag/application'
+
   def index
     @features = GreenFlag::Feature.all
   end
