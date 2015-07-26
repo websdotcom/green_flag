@@ -1,0 +1,34 @@
+// Place all the styles related to the green_flag/admin/features controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.page-title {
+  a {
+    color: white;
+  }
+}
+
+
+.percentage {
+  white-space: nowrap;
+}
+
+ul.decisions-made-summary {
+  
+  padding: 0;
+  margin: 10px;
+
+  li {
+    display: inline-block;
+    list-style-type: none;
+    width: 45%;
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  .decision-number {
+    font-weight: 500;
+    font-size: 24px;
+  }
+}
