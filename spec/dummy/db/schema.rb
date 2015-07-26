@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150218171852) do
+ActiveRecord::Schema.define(:version => 20150726195118) do
 
   create_table "green_flag_feature_decisions", :force => true do |t|
     t.integer  "feature_id",      :null => false
@@ -68,5 +68,10 @@ ActiveRecord::Schema.define(:version => 20150218171852) do
 
   add_index "green_flag_site_visitors", ["user_id"], :name => "index_green_flag_site_visitors_on_user_id", :unique => true
   add_index "green_flag_site_visitors", ["visitor_code"], :name => "index_green_flag_site_visitors_on_visitor_code", :unique => true
+
+  create_table "users", :force => true do |t|
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
 end
