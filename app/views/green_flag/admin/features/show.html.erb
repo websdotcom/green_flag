@@ -1,9 +1,7 @@
 <%= stylesheet_link_tag '//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css' %>
 <%= stylesheet_link_tag 'green_flag/admin/features' %>
 
-<%= content_for(:above_content) do %>
-  <h1 class="page-title"><%= link_to 'Feature Flags', green_flag_admin_features_path %> - <%= @feature.code %></h1>
-<% end %>
+<h1 class="page-title"><%= link_to 'Feature Flags', admin_features_path %> - <%= @feature.code %></h1>
 
 <%# Document structure %>
 <div class="row">

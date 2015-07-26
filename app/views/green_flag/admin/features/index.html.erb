@@ -1,15 +1,13 @@
 <%= stylesheet_link_tag '//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css' %>
 <%= stylesheet_link_tag 'green_flag/admin/features' %>
 
-<%= content_for(:above_content) do %>
-  <h1 class="page-title"><%= link_to 'Feature Flags', green_flag_admin_features_path %></h1>
-<% end %>
+<h1 class="page-title"><%= link_to 'Feature Flags', admin_features_path %></h1>
 
 <table>
   <tbody>
     <% @features.each do |feature| %>
       <tr>
-        <th><%= link_to feature.code, green_flag_admin_feature_path(feature) %></th>
+        <th><%= link_to feature.code, admin_feature_path(feature) %></th>
         <td><%= feature.description %></td>
       </tr>
     <% end %>
