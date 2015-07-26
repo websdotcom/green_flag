@@ -1,10 +1,3 @@
-// Place all the behaviors and hooks related to the matching controller here.
-// All this logic will automatically be available in application.js.
-
-//= require bootstrap
-//= require backbone-1.0.0
-//= require common/backbone.marionette.min
-
 _.templateSettings = {
   evaluate : /\{\[([\s\S]+?)\]\}/g,
   interpolate : /\{\{([\s\S]+?)\}\}/g
