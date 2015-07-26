@@ -1,15 +1,14 @@
 
-<nav class="navbar navbar-inverse navbar-fixed-top">
-  <h1 class="page-title"><%= link_to 'Feature Flags', admin_features_path %></h1>
-</nav>
+<div class="header clearfix">
+  <h1><%= link_to 'Feature Flags', admin_features_path %></h1>
+</div>
 
-<table>
-  <tbody>
-    <% @features.each do |feature| %>
-      <tr>
-        <th><%= link_to feature.code, admin_feature_path(feature) %></th>
-        <td><%= feature.description %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="row">
+  <% @features.each do |feature| %>
+    <div class="col-md-6">
+      <h4><%= link_to feature.code, admin_feature_path(feature) %></h4>
+      <p><%= feature.description %></p>
+    </div>
+  <% end %>
+
+</div>
