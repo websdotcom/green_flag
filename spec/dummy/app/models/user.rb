@@ -1,3 +1,3 @@
 class User < ActiveRecord::Base
-  # attr_accessible :title, :body
+  attr_protected # none, for testing convenience
 end
