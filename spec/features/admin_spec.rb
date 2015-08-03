@@ -1,3 +1,5 @@
+require "spec_helper"
+
 feature 'Editing a feature in the admin system' do
 
   let(:feature) { FactoryGirl.create(:green_flag_feature) }
