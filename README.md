@@ -2,7 +2,7 @@
 
 ![Green Flag Logo](./green_flag.png?raw=true)
 
-Feature testing for environmentally-conscious pirates.
+A feature-flag system that makes to *really easy* for application developers to add and manage features.  You can roll out features to a percentage of your users, or you can define groups to see the new feature.  Want to test a new feature on 50% of your premium-plan users named "Fred"?  GreenFlag can do that.
 
 ## New feature?  Just do this:
 
@@ -15,13 +15,18 @@ else
 end
 ```
 
-Add some users:
-```ruby
-user = User.find(1)
-GreenFlag::FeatureDecision.whitelist_user!(:my_awesome_feature, user)
-```
+That's it. You don't have to create a feature record (it's done automatically).  
+You don't have to figure out who should see the feature - that's set up in the admin web interface.
 
-Now that user, and only that user, will see your new awesome feature.
+Features are off by default - so if you deploy your new code, no one will get the new hotness until you open it up with the admin web interface.  
+
+## Installation
+
+### Requirements
+- Rails 3
+- Postgres
+
+TODO: explain the installation.  Set up visitor groups.
 
 ## How it works
 
