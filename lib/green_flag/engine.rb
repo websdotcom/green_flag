@@ -9,5 +9,8 @@ module GreenFlag
       g.helper false
     end
 
+    initializer "green_flag.site_visitor_management" do |app|
+      ActionController::Base.send :include, GreenFlag::SiteVisitorManagement
+    end
   end
 end
