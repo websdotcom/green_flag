@@ -12,10 +12,7 @@ class GreenFlag::Feature < ActiveRecord::Base
   def self.for_code!(code)
     feature = where(code: code.to_s).first
     unless feature
-      transaction do
-        feature = create!(code: code.to_s)
-        feature.add_default_rules!
-      end
+      feature = create!(code: code.to_s)
     end
     feature
   rescue ActiveRecord::RecordNotUnique, PG::Error => ex
@@ -32,14 +29,6 @@ class GreenFlag::Feature < ActiveRecord::Base
     end
 
     feature_decision
-  end
-
-  def add_default_rules!
-    rules.create!(
-      group_key: 'Pre-existing Visitors',
-      percentage: 0,
-      order_by: 0,
-    )
   end
 
   def enabled_count

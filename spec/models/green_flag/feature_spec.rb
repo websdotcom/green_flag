@@ -3,12 +3,12 @@ require 'spec_helper'
     describe '.for_code!' do
       subject { GreenFlag::Feature.for_code!('foo') }
       
-      it 'creates a feature' do
+      it 'when feature does not exist, creates a feature' do
         expect{ subject }.to change { GreenFlag::Feature.count }.by(1)
       end
-      
-      it 'adds a default rule' do
-        expect(subject.rules.count).to eq(1)
+      it 'when feature does exists, does not create a feature' do
+        FactoryGirl.create(:green_flag_feature, code: 'foo')
+        expect{ subject }.to_not change { GreenFlag::Feature.count }
       end
     end
 
