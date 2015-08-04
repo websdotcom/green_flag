@@ -1,11 +1,11 @@
 PATH
   remote: .
   specs:
-    green_flag (0.0.1)
-      activerecord-concurrent-index
-      pg
-      rails (~> 3.2.22)
-      sass-rails
+    green_flag (0.1.0)
+      activerecord-concurrent-index (~> 0.0.1)
+      pg (~> 0.18)
+      rails (~> 3.2)
+      sass-rails (~> 3.2)
 
 GEM
   remote: https://rubygems.org/
