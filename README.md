@@ -1,6 +1,4 @@
-# Green Flag
-
-![Green Flag Logo](./green_flag.png?raw=true)
+# ![Green Flag Logo](./green_flag_small.png?raw=true) Green Flag
 
 A feature-flag system that makes it *really easy* for application developers to add and manage features.  You can roll out features to a percentage of your users, or you can define groups to see the new feature.  Want to test a new feature on 50% of your premium-plan users named "Fred"?  GreenFlag can do that.
 
