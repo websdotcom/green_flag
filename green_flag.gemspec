@@ -7,11 +7,18 @@ require "green_flag/version"
 Gem::Specification.new do |s|
   s.name        = "green_flag"
   s.version     = GreenFlag::VERSION
-  s.authors     = ["TODO: Your name"]
-  s.email       = ["TODO: Your email"]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of GreenFlag."
-  s.description = "TODO: Description of GreenFlag."
+  s.authors     = ["Tim Morton"]
+  s.email       = ["tim@timothymorton.com"]
+  s.homepage    = "https://github.com/websdotcom/green_flag"
+  s.summary     = "A feature-flag system."
+  s.description = <<-EOF
+    A feature-flag system that makes it *really easy* for application developers
+    to add and manage features.  You can roll out features to a percentage of 
+    your users, or you can define groups to see the new feature.  
+    Want to test a new feature on 50% of your premium-plan users named "Fred"?  
+    GreenFlag can do that.
+  EOF
+  s.license = "MIT"
 
   s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir["spec/**/*"]
