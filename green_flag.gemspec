@@ -24,9 +24,9 @@ Gem::Specification.new do |s|
   s.test_files = Dir["spec/**/*"]
 
   s.add_dependency "rails", "~> 3.2"
-  s.add_dependency "pg", "~> 0.18"
-  s.add_dependency "activerecord-concurrent-index", "~> 0.0.1"
-  s.add_dependency "sass-rails", "~> 3.2"
+  s.add_dependency "pg"
+  s.add_dependency "activerecord-concurrent-index"
+  s.add_dependency "sass-rails"
 
   s.add_development_dependency 'rspec-rails'
   s.add_development_dependency 'factory_girl_rails'
