@@ -185,7 +185,7 @@ GreenFlag.WhiteListUserView = Backbone.Marionette.ItemView.extend({
   },
 
   destroyUser: function() {
-    this.model.destroy({wait: true});
+    this.model.destroy();
   }
 });
 
