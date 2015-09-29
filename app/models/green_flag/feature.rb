@@ -53,6 +53,15 @@ class GreenFlag::Feature < ActiveRecord::Base
 
     last_rule.present? ? last_rule.version_number : version_number
   end
+
+  def fully_enabled?
+    rules.where(:group_key => "Everyone", :percentage => 100).size > 0
+  end
+
+  def fully_disabled?
+    percentages = rules.map(&:percentage)
+    percentages.size == percentages.count {|percent| percent == 0 }
+  end
   
   private
 
