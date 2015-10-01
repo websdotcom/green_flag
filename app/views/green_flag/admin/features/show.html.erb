@@ -134,6 +134,32 @@
   <h2>Your Status <span class="label {{labelClass}}">{{status}}</span></h2>
 </script>
 
+<%= link_to "Delete Flag", admin_feature_path(@feature.id),
+  class: "btn btn-danger", id: 'delete-flag-button' %>
+
+<script type="text/javascript">
+  $('#delete-flag-button').click(function(event) {
+    event.preventDefault();
+
+    var response = prompt("The feature and all associated rules and decisions will " + 
+      "be permanently deleted. If you are sure you understand the consequences, type " +
+      "\"DESTROY\" below.");
+
+    switch(response) {
+      case "DESTROY":
+        $.ajax({
+          url: event.currentTarget.baseURI,
+          type: "DELETE"
+        }).done(function() {
+          window.location.href = event.currentTarget.baseURI;
+        });
+        break;
+      default:
+        break;
+    }
+  });
+</script>
+
 <%# Javascript kickstart %>
 <%= javascript_include_tag 'green_flag/admin/features' %>
 <script>
