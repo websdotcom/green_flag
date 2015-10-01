@@ -3,7 +3,7 @@ class GreenFlag::Admin::FeaturesController < ApplicationController
   layout 'green_flag/application'
 
   def index
-    @features = GreenFlag::Feature.all
+    @features = GreenFlag::Feature.order(:created_at).all
   end
 
   def show

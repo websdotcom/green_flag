@@ -53,6 +53,14 @@ class GreenFlag::Feature < ActiveRecord::Base
 
     last_rule.present? ? last_rule.version_number : version_number
   end
+
+  def fully_enabled?
+    rules.count > 0 && rules.all? { |rule| rule.percentage == 100 }
+  end
+
+  def fully_disabled?
+    rules.count == 0 || rules.all? { |rule| rule.percentage == 0 }
+  end
   
   private
 

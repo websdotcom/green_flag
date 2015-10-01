@@ -6,8 +6,19 @@
 <div class="row">
   <% @features.each do |feature| %>
     <div class="col-md-6">
-      <h4><%= link_to feature.code, admin_feature_path(feature) %></h4>
-      <p><%= feature.description %></p>
+      <div class="well">
+        <h4>
+          <%= link_to feature.code, admin_feature_path(feature) %>
+          <% if feature.fully_enabled? %><span class="label label-success">100%</span><% end %>
+          <% if feature.fully_disabled? %><span class="label label-danger">0%</span><% end %>
+        </h4>
+        
+        <div class="help-block">
+          <div>Created on <strong><%= feature.created_at.strftime("%d %b %Y") %></strong></div>
+        </div>
+
+        <p><%= feature.description %></p>
+      </div>
     </div>
   <% end %>
 
