@@ -9,6 +9,9 @@ class GreenFlag::Feature < ActiveRecord::Base
 
   self.include_root_in_json = false
 
+  #DELETION_MAX_FEATURE_DECISIONS = 1000000
+   DELETION_MAX_FEATURE_DECISIONS = 0
+
   def self.for_code!(code)
     feature = where(code: code.to_s).first
     unless feature
@@ -61,7 +64,17 @@ class GreenFlag::Feature < ActiveRecord::Base
   def fully_disabled?
     rules.count == 0 || rules.all? { |rule| rule.percentage == 0 }
   end
-  
+
+  def require_manual_deletion?
+    feature_decisions.count >= DELETION_MAX_FEATURE_DECISIONS
+  end
+
+  def delete_associated_data
+    GreenFlag::Rule.where(feature_id: id).delete_all
+    GreenFlag::FeatureDecision.where(feature_id: id).delete_all
+    GreenFlag::FeatureEvent.where(feature_id: id).delete_all
+  end
+
   private
 
   def decide_feature_decision(feature_decision)
