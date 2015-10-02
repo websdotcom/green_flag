@@ -65,7 +65,7 @@ class GreenFlag::Feature < ActiveRecord::Base
     rules.count == 0 || rules.all? { |rule| rule.percentage == 0 }
   end
 
-  def require_manual_deletion?
+  def requires_manual_deletion?
     feature_decisions.count >= DELETION_MAX_FEATURE_DECISIONS
   end
 

@@ -16,19 +16,10 @@ class GreenFlag::Admin::FeaturesController < ApplicationController
 
   def destroy
     if @feature.present?
-      feature_code = @feature.code
-
-      if @feature.require_manual_deletion?
-        message = "Feature \"#{feature_code}\" requires manual deletion due to its large number of associated feature decisions."
-      else
-        @feature.delete_associated_data
-        @feature.destroy
-
-        message = "Feature \"#{feature_code}\" has been successfully deleted."
-      end
+      destroy_feature_or_set_manual_deletion_notice
+    else
+      flash[:error] = "The feature could not be found."
     end
-
-    flash[:notice] = message
 
     redirect_to action: :index
   end
@@ -43,6 +34,21 @@ private
 
   def find_feature
     @feature = GreenFlag::Feature.where(id: params[:id]).first
+  end
+
+  def destroy_feature_or_set_manual_deletion_notice
+    if @feature.requires_manual_deletion?
+      flash[:notice] = "Feature \"#{@feature.code}\" requires manual deletion due to its large number of associated feature decisions."
+    else
+      destroy_feature
+    end
+  end
+
+  def destroy_feature
+    flash[:notice] = "Feature \"#{@feature.code}\" has been successfully deleted."
+
+    @feature.delete_associated_data
+    @feature.destroy
   end
 
   def status_text(feature_decison)
