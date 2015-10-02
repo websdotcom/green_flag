@@ -7,7 +7,7 @@ require "green_flag/version"
 Gem::Specification.new do |s|
   s.name        = "green_flag"
   s.version     = GreenFlag::VERSION
-  s.authors     = ["Tim Morton"]
+  s.authors     = ["Tim Morton", "Jason Nappier", "Adeel Raza"]
   s.email       = ["tim@timothymorton.com"]
   s.homepage    = "https://github.com/websdotcom/green_flag"
   s.summary     = "A feature-flag system."
