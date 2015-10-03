@@ -1,5 +1,3 @@
-require 'pp'
-
 class GreenFlag::Admin::FeaturesController < ApplicationController
   layout 'green_flag/application'
   helper_method :flash_class
