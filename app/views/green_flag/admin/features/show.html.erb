@@ -103,8 +103,6 @@
     </ul>
 
   </div>
-
-
 </script>
 
 <%# Templates - white list %>
@@ -134,8 +132,12 @@
   <h2>Your Status <span class="label {{labelClass}}">{{status}}</span></h2>
 </script>
 
+<%= render 'delete_flag_button' %>
+
 <%# Javascript kickstart %>
 <%= javascript_include_tag 'green_flag/admin/features' %>
+<%= javascript_include_tag 'green_flag/admin/feature-deletion' %>
+
 <script>
   GreenFlag.FeatureEditor.start({
     feature: <%= @feature.to_json.html_safe %>,

@@ -1,0 +1,19 @@
+<%
+  destroyable  = (@feature.fully_enabled? || @feature.fully_disabled?)
+  button_class = destroyable ? 'btn btn-danger' : 'btn btn-danger disabled'
+
+  confirmation_message = "Are you sure? The feature and all associated rules and \
+decisions will be permanently deleted."
+%>
+
+<% unless destroyable %>
+  <div class="tooltip-wrapper" data-title="For deletion, the rules must be set to
+  100% or 0% for all groups. After setting the rule percentages, refresh this page.">
+<% end %>
+
+<%= link_to "Delete Flag", admin_feature_path(@feature.id), class: button_class,
+   data: { confirm: confirmation_message }, method: :delete %>
+
+<% unless destroyable %>
+  </div>
+<% end %>

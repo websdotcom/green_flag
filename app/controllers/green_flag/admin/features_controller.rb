@@ -1,14 +1,25 @@
 class GreenFlag::Admin::FeaturesController < ApplicationController
-
   layout 'green_flag/application'
+  helper_method :flash_class
+
+  before_filter :find_feature, only: [:show, :destroy]
 
   def index
     @features = GreenFlag::Feature.order(:created_at).all
   end
 
   def show
-    @feature = GreenFlag::Feature.find(params[:id])
     @visitor_groups = GreenFlag::VisitorGroup.all.map { |group| { key: group.key, description: group.description } }
+  end
+
+  def destroy
+    if @feature.present?
+      destroy_feature_or_set_manual_deletion_notice
+    else
+      flash[:error] = "The feature could not be found."
+    end
+
+    redirect_to action: :index
   end
 
   def current_visitor_status
@@ -18,6 +29,25 @@ class GreenFlag::Admin::FeaturesController < ApplicationController
   end
 
 private
+
+  def find_feature
+    @feature = GreenFlag::Feature.where(id: params[:id]).first
+  end
+
+  def destroy_feature_or_set_manual_deletion_notice
+    if @feature.requires_manual_deletion?
+      flash[:notice] = "Feature \"#{@feature.code}\" requires manual deletion due to its large number of associated feature decisions."
+    else
+      destroy_feature
+    end
+  end
+
+  def destroy_feature
+    flash[:notice] = "Feature \"#{@feature.code}\" has been successfully deleted."
+
+    @feature.delete_associated_data
+    @feature.destroy
+  end
 
   def status_text(feature_decison)
     if feature_decison.nil? || feature_decison.undecided?
