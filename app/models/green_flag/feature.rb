@@ -9,8 +9,7 @@ class GreenFlag::Feature < ActiveRecord::Base
 
   self.include_root_in_json = false
 
-  #DELETION_MAX_FEATURE_DECISIONS = 1000000
-   DELETION_MAX_FEATURE_DECISIONS = 0
+  DELETION_MAX_FEATURE_DECISIONS = 1000000
 
   def self.for_code!(code)
     feature = where(code: code.to_s).first
