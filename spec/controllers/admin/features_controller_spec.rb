@@ -17,14 +17,14 @@ describe GreenFlag::Admin::FeaturesController do
     end
   end
 
-  describe '#destroy' do
+  describe "#destroy" do
     subject { delete :destroy, id: feature.id }
 
-    it 'redirects to the index action' do
+    it "redirects to the index action" do
       expect(subject).to redirect_to action: :index
     end
 
-    context 'when the feature can be deleted' do
+    context "when the feature can be deleted" do
       before(:each) do
         5.times do
           FactoryGirl.create(:green_flag_rule, feature_id: feature.id)
@@ -35,7 +35,7 @@ describe GreenFlag::Admin::FeaturesController do
         subject
       end
 
-      it 'deletes the feature' do
+      it "deletes the feature" do
        expect(GreenFlag::Feature.find_by_id(feature.id)).to be_nil
       end
 
@@ -51,12 +51,12 @@ describe GreenFlag::Admin::FeaturesController do
         expect(GreenFlag::FeatureDecision.where(feature_id: feature.id)).to eq []
       end
 
-      it 'sets a successful flash notice' do
+      it "sets a successful flash notice" do
         expect(flash[:notice]).to eq "Feature \"#{feature.code}\" has been successfully deleted."
       end
     end
 
-    context 'when the feature cannot be deleted' do
+    context "when the feature cannot be deleted" do
       it 'sets a flash notice indicating that manual deletion is required' do
         allow_any_instance_of(GreenFlag::Feature).to receive(:requires_manual_deletion?).and_return(true)
 
@@ -66,13 +66,13 @@ describe GreenFlag::Admin::FeaturesController do
       end
     end
 
-    context 'when the feature cannot be found' do
-      it 'sets a flash error indicating the error' do
+    context "when the feature cannot be found" do
+      it "sets a flash error indicating the error" do
         feature.destroy
 
         subject
 
-        expect(flash[:error]).to eq 'The feature could not be found.'
+        expect(flash[:error]).to eq "The feature could not be found."
       end
     end
   end

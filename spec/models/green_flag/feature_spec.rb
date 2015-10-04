@@ -134,14 +134,14 @@ require 'spec_helper'
   end
 
   describe "#requires_manual_deletion?" do
-    let(:feature)           { GreenFlag::Feature.create(code: 'big_font') }
+    let(:feature)           { GreenFlag::Feature.create(code: "big_font") }
     let(:feature_decisions) { [] }
 
     context "with more than 1,000,000 feature decisions" do
-      it 'returns true' do
+      it "returns true" do
         expect(feature_decisions).to receive(:count).and_return(2_000_000)
         expect(feature).to receive(:feature_decisions).
-         and_return(feature_decisions)
+          and_return(feature_decisions)
 
         expect(feature.requires_manual_deletion?).to be_true
       end
@@ -151,7 +151,7 @@ require 'spec_helper'
       it "returns false" do
         expect(feature_decisions).to receive(:count).and_return(500_000)
         expect(feature).to receive(:feature_decisions).
-         and_return(feature_decisions)
+          and_return(feature_decisions)
 
         expect(feature.requires_manual_deletion?).to be_false
       end
