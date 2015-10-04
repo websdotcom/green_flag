@@ -36,7 +36,7 @@ describe GreenFlag::Admin::FeaturesController do
       end
 
       it "deletes the feature" do
-       expect(GreenFlag::Feature.find_by_id(feature.id)).to be_nil
+        expect(GreenFlag::Feature.find_by_id(feature.id)).to be_nil
       end
 
       it "deletes the feature's rules" do
@@ -52,17 +52,21 @@ describe GreenFlag::Admin::FeaturesController do
       end
 
       it "sets a successful flash notice" do
-        expect(flash[:notice]).to eq "Feature \"#{feature.code}\" has been successfully deleted."
+        expect(flash[:notice]).to eq "Feature \"#{feature.code}\" has been \
+successfully deleted."
       end
     end
 
     context "when the feature cannot be deleted" do
       it 'sets a flash notice indicating that manual deletion is required' do
-        allow_any_instance_of(GreenFlag::Feature).to receive(:requires_manual_deletion?).and_return(true)
+        allow_any_instance_of(GreenFlag::Feature).to \
+receive(:requires_manual_deletion?).and_return(true)
 
         subject
 
-        expect(flash[:notice]).to eq "Feature \"#{feature.code}\" requires manual deletion due to its large number of associated feature decisions."
+        expect(flash[:notice]).to eq "Feature \"#{feature.code}\" requires \
+manual deletion due to its large number of associated feature \
+decisions."
       end
     end
 
