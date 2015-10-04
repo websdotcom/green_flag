@@ -36,7 +36,8 @@ private
 
   def destroy_feature_or_set_manual_deletion_notice
     if @feature.requires_manual_deletion?
-      flash[:notice] = "Feature \"#{@feature.code}\" requires manual deletion due to its large number of associated feature decisions."
+      flash[:notice] = "Feature \"#{@feature.code}\" requires manual deletion \
+due to its large number of associated feature decisions."
     else
       destroy_feature
     end
