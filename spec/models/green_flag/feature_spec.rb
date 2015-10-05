@@ -73,7 +73,8 @@ describe GreenFlag::Feature do
       subject { feature.forget_non_manual_decisions!(enabled) }
 
       before(:each) do
-        @manual_fd = GreenFlag::FeatureDecision.create!(feature_id: feature.id, manual: true, site_visitor_id: 1)
+        @manual_fd = GreenFlag::FeatureDecision.create!(feature_id: feature.id, manual: true, 
+          site_visitor_id: 1)
       end
 
       it "should not delete the manual decisions" do
@@ -88,7 +89,8 @@ describe GreenFlag::Feature do
     context "when there are automatic decisions" do
       before(:each) do
         @feature2 = GreenFlag::Feature.create!(code: "huge_banner_ad")
-        @auto_fd = GreenFlag::FeatureDecision.create!(feature_id: @feature2.id, manual: false, enabled: true, site_visitor_id: 1)
+        @auto_fd = GreenFlag::FeatureDecision.create!(feature_id: @feature2.id, manual: false, 
+          enabled: true, site_visitor_id: 1)
 
         @feature2.forget_non_manual_decisions!(enabled)
       end
@@ -102,7 +104,8 @@ describe GreenFlag::Feature do
         feature_event = GreenFlag::FeatureEvent.last
         expect(feature_event).to be_present
         expect(feature_event.feature_id).to eq @feature2.id
-        expect(feature_event.event_type_code).to eq GreenFlag::FeatureEvent::ENABLED_DECISIONS_FORGOTTEN
+        expect(feature_event.event_type_code).to eq \
+          GreenFlag::FeatureEvent::ENABLED_DECISIONS_FORGOTTEN
         expect(feature_event.count).to eq 1
       end
     end
@@ -118,7 +121,8 @@ describe GreenFlag::Feature do
         @latest_version_number = 15
 
         (0...3).each do |i|
-          FactoryGirl.create(:green_flag_rule, feature_id: feature.id, version_number: @latest_version_number - i) 
+          FactoryGirl.create(:green_flag_rule, feature_id: feature.id, 
+            version_number: @latest_version_number - i) 
         end
       end
 
@@ -182,6 +186,33 @@ describe GreenFlag::Feature do
 
     it "deletes all associated feature decisions" do
       expect(feature.feature_decisions.count).to eq 0
+    end
+  end
+
+  describe "destroyable?" do
+    let(:feature) { GreenFlag::Feature.create(code: "big_font") }
+
+    context "when the feature is fully enabled" do
+      it "returns true" do
+        allow(feature).to receive(:fully_enabled?).and_return(true)
+        expect(feature.destroyable?).to be_true
+      end
+    end
+
+    context "when the feature is fully disabled" do
+      it "returns true" do
+        allow(feature).to receive(:fully_disabled?).and_return(true)
+        expect(feature.destroyable?).to be_true
+      end
+    end
+
+    context "when the feature is neither fully enabled nor fully disabled" do
+      it "returns false" do
+        allow(feature).to receive(:fully_enabled?).and_return(false)
+        allow(feature).to receive(:fully_disabled?).and_return(false)
+
+        expect(feature.destroyable?).to be_false
+      end
     end
   end
 end
