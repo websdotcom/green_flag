@@ -64,14 +64,20 @@ class GreenFlag::Feature < ActiveRecord::Base
     rules.count == 0 || rules.all? { |rule| rule.percentage == 0 }
   end
 
+  def destroyable?
+    fully_enabled? || fully_disabled?
+  end
+
   def requires_manual_deletion?
     feature_decisions.count >= DELETION_MAX_FEATURE_DECISIONS
   end
 
   def delete_associated_data
-    GreenFlag::Rule.where(feature_id: id).delete_all
-    GreenFlag::FeatureDecision.where(feature_id: id).delete_all
-    GreenFlag::FeatureEvent.where(feature_id: id).delete_all
+    GreenFlag::Feature.transaction do
+      GreenFlag::Rule.where(feature_id: id).delete_all
+      GreenFlag::FeatureDecision.where(feature_id: id).delete_all
+      GreenFlag::FeatureEvent.where(feature_id: id).delete_all
+    end
   end
 
   private
