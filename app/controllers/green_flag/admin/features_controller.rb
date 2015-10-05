@@ -16,7 +16,7 @@ class GreenFlag::Admin::FeaturesController < ApplicationController
     @feature = GreenFlag::Feature.where(id: params[:id]).first
 
     if @feature.present?
-      destroy_feature_or_set_manual_deletion_notice
+      destroy_feature
     else
       flash[:error] = "The feature could not be found."
     end

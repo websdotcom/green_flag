@@ -57,19 +57,6 @@ successfully deleted."
       end
     end
 
-    context "when the feature cannot be deleted" do
-      it "sets a flash notice indicating that manual deletion is required" do
-        allow_any_instance_of(GreenFlag::Feature).to \
-receive(:requires_manual_deletion?).and_return(true)
-
-        subject
-
-        expect(flash[:notice]).to eq "Feature \"#{feature.code}\" requires \
-manual deletion due to its large number of associated feature \
-decisions."
-      end
-    end
-
     context "when the feature cannot be found" do
       it "sets a flash error indicating the error" do
         feature.destroy

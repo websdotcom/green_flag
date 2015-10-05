@@ -74,7 +74,7 @@ describe GreenFlag::Feature do
 
       before(:each) do
         @manual_fd = GreenFlag::FeatureDecision.create!(feature_id: feature.id, manual: true, 
-          site_visitor_id: 1)
+                                                        site_visitor_id: 1)
       end
 
       it "should not delete the manual decisions" do
@@ -90,7 +90,7 @@ describe GreenFlag::Feature do
       before(:each) do
         @feature2 = GreenFlag::Feature.create!(code: "huge_banner_ad")
         @auto_fd = GreenFlag::FeatureDecision.create!(feature_id: @feature2.id, manual: false, 
-          enabled: true, site_visitor_id: 1)
+                                                      enabled: true, site_visitor_id: 1)
 
         @feature2.forget_non_manual_decisions!(enabled)
       end
@@ -122,7 +122,7 @@ describe GreenFlag::Feature do
 
         (0...3).each do |i|
           FactoryGirl.create(:green_flag_rule, feature_id: feature.id, 
-            version_number: @latest_version_number - i) 
+                                               version_number: @latest_version_number - i)
         end
       end
 
