@@ -5,11 +5,11 @@ describe GreenFlag::Feature do
     subject { GreenFlag::Feature.for_code!("foo") }
 
     it "when feature does not exist, creates a feature" do
-      expect{ subject }.to change { GreenFlag::Feature.count }.by(1)
+      expect { subject }.to change { GreenFlag::Feature.count }.by(1)
     end
     it "when feature does exists, does not create a feature" do
       FactoryGirl.create(:green_flag_feature, code: "foo")
-      expect{ subject }.to_not change { GreenFlag::Feature.count }
+      expect { subject }.to_not change { GreenFlag::Feature.count }
     end
   end
 
