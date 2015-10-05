@@ -1,3 +1,3 @@
 $(function() {
-    $('.tooltip-wrapper').tooltip({position: "bottom"});
+  $('.tooltip-wrapper').tooltip({position: 'bottom'});
 });
