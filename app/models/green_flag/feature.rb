@@ -61,7 +61,19 @@ class GreenFlag::Feature < ActiveRecord::Base
   def fully_disabled?
     rules.count == 0 || rules.all? { |rule| rule.percentage == 0 }
   end
-  
+
+  def destroyable?
+    fully_enabled? || fully_disabled?
+  end
+
+  def delete_associated_data
+    GreenFlag::Feature.transaction do
+      GreenFlag::Rule.where(feature_id: id).delete_all
+      GreenFlag::FeatureDecision.where(feature_id: id).delete_all
+      GreenFlag::FeatureEvent.where(feature_id: id).delete_all
+    end
+  end
+
   private
 
   def decide_feature_decision(feature_decision)
