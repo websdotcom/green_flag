@@ -11,7 +11,9 @@ module GreenFlag
 
     initializer "green_flag.site_visitor_management" do |app|
       ActionController::Base.send :include, GreenFlag::SiteVisitorManagement
+    end
 
+    initializer "Asset precompilation", :group => :all do |app|
       app.config.assets.precompile = ['*.js', '*.css']
     end
   end
