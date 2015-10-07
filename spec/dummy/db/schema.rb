@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(:version => 20150726204409) do
     t.integer  "rule_id"
   end
 
+  add_index "green_flag_feature_decisions", ["feature_id"], :name => "index_green_flag_feature_decisions_on_feature_id"
   add_index "green_flag_feature_decisions", ["site_visitor_id", "feature_id"], :name => "index_gf_feature_decisions_on_site_visitor_id_feature_id", :unique => true
 
   create_table "green_flag_feature_events", :force => true do |t|
