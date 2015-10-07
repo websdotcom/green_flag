@@ -14,7 +14,7 @@ module GreenFlag
     end
 
     initializer "Asset precompilation", :group => :all do |app|
-      app.config.assets.precompile = ['*.js', '*.css']
+      app.config.assets.precompile += %w(feature-deletion.js features.js rules.js)
     end
   end
 end
