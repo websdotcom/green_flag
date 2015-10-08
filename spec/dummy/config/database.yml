@@ -41,3 +41,7 @@ development: &development
 test:
   <<: *development
   database: green_flag_dummy_test
+
+production:
+  <<: *development
+

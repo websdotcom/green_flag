@@ -14,7 +14,13 @@ module GreenFlag
     end
 
     initializer "Asset precompilation", :group => :all do |app|
-      app.config.assets.precompile += %w(feature-deletion.js features.js rules.js)
+      app.config.assets.precompile += %w(
+        green_flag/admin/feature-deletion.js
+        green_flag/admin/features.js
+        green_flag/admin/rules.js
+        green_flag/admin/features.css
+        green_flag/admin/rules.css
+      )
     end
   end
 end
