@@ -12,5 +12,15 @@ module GreenFlag
     initializer "green_flag.site_visitor_management" do |app|
       ActionController::Base.send :include, GreenFlag::SiteVisitorManagement
     end
+
+    initializer "Asset precompilation", :group => :all do |app|
+      app.config.assets.precompile += %w(
+        green_flag/admin/feature-deletion.js
+        green_flag/admin/features.js
+        green_flag/admin/rules.js
+        green_flag/admin/features.css
+        green_flag/admin/rules.css
+      )
+    end
   end
 end

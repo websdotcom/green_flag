@@ -26,7 +26,11 @@ Gem::Specification.new do |s|
   s.add_dependency "rails", "~> 3.2"
   s.add_dependency "pg"
   s.add_dependency "activerecord-concurrent-index"
+
+  # Assets for the admin pages
+  s.add_dependency "jquery-rails"
   s.add_dependency "sass-rails"
+  s.add_dependency "uglifier"
 
   s.add_development_dependency 'rspec-rails', "~> 2"
   s.add_development_dependency 'factory_girl_rails'
